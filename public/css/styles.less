@@ -1,0 +1,93 @@
+.ea {
+	
+	.col-5() {
+		-ms-flex: 0 0 41.666667% !important;
+		flex: 0 0 41.666667% !important;
+		max-width: 41.666667% !important;
+	}
+	.col-6() {
+		-ms-flex: 0 0 50% !important;
+		flex: 0 0 50% !important;
+		max-width: 50% !important;
+	}
+	.col-9() {
+		-ms-flex: 0 0 75% !important;
+    	flex: 0 0 75% !important;
+    	max-width: 75% !important;
+	}
+	.col-12() {
+		-ms-flex: 0 0 100% !important;
+    	flex: 0 0 100% !important;
+    	max-width: 100% !important;
+	}
+
+	ul.ul-3-col {
+		&[max-width~="700px"] {
+			columns: 2;
+			-webkit-columns: 2;
+			-moz-columns: 2;
+		}
+		&[max-width~="500px"] {
+			columns: 1;
+			-webkit-columns: 1;
+			-moz-columns: 1;
+		}
+	}
+
+	/**
+	* search form
+	*/
+	form.ea-search-form {
+		&[max-width~="700px"] {
+			.hide-md {
+				display: none;
+			}
+			.ea-search-form-sale-rent,
+			.ea-search-form-price-sale,
+			.ea-search-form-price-rent,
+			.ea-search-form-beds,
+			.ea-search-form-type {
+				.col-6();
+			}
+			.ea-search-form-location {
+				.col-12();
+			}
+		}
+		&[max-width~="500px"] {
+			.ea-search-form-group {
+				.col-12();
+				padding-bottom: 6px;
+			}
+			.ea-search-form-beds,
+			.ea-search-form-price-sale,
+			.ea-search-form-price-rent {
+				label {
+					margin-bottom: 2px;
+				}
+			}
+			.ea-search-form-beds,
+			.ea-search-form-type,
+			.ea-search-form-location {
+				padding-bottom: 0;
+			}
+			.ea-search-form-price-sale,
+			.ea-search-form-price-rent,
+			.ea-search-form-beds {
+				.selects {
+					width: 100%;
+				}
+			}
+			.ea-search-form-price-sale,
+			.ea-search-form-price-rent {
+				.form-group {
+					margin-bottom: 0;
+				}
+			}
+			.ea-search-form-sale-rent {
+				.toggle {
+					padding: 3px 0 !important;
+				}
+			}
+		}
+	}
+}
