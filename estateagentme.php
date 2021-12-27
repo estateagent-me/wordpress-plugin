@@ -9,7 +9,7 @@
  * Plugin Name:       EstateAgent.Me
  * Plugin URI:        https://estateagent.me
  * Description:       List your properties on a WordPress-powered site via your EstateAgent.Me Agent Account
- * Version:           1.2.1
+ * Version:           1.2.2
  * Author:            EstateAgent.Me
  * Author URI:        https://estateagent.me
  * License:           GPL-2.0+
@@ -18,7 +18,7 @@
  * Domain Path:       /languages
  */
 
-define('EA_VERSION', '1.2.1');
+define('EA_VERSION', '1.2.2');
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -62,27 +62,6 @@ require_once plugin_dir_path( __FILE__ ) . 'inc/classes/property.php';      // p
 require_once plugin_dir_path( __FILE__ ) . 'inc/install.php';               // install (for creating DB's)
 require_once plugin_dir_path( __FILE__ ) . 'inc/cron_update.php';           // function that updates data
 require_once plugin_dir_path( __FILE__ ) . 'inc/cron_schedule.php';         // run cron itself
-
-
-add_action( 'admin_init', 'is_wp_control_installed' );
-function is_wp_control_installed() {
-    if ( is_admin() && current_user_can( 'activate_plugins' ) &&  !is_plugin_active( 'wp-crontrol/wp-crontrol.php' ) ) {
-        add_action( 'admin_notices', 'ea_wp_control_inactive' );
-    }
-}
-
-function ea_wp_control_inactive(){
-    ?><div class="ea-notice warning" style="display:block;">
-        <p><strong>
-            The EstateAgent.Me plugin requires the
-            <a href="plugin-install.php?s=wp+control&tab=search&type=term" target="_blank">WP Control plugin</a>
-            installed, activated & setup correctly in order to fully function.
-        </strong></p>
-        <p><strong>
-            Please follow <a href="options-general.php?page=estateagentme">our instructions</a> on how to do this.
-        </strong></p>
-    </div><?php
-}
 
 /** ---------------------------------------------------------------------------------------------------- **/
 

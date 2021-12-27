@@ -3,12 +3,15 @@ Contributors: dazecoop
 Requires at least: 4.1
 Tested up to: 5.8.2
 Requires PHP: 5.4
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 
 == Description ==
 List your properties on a WordPress-powered site via your EstateAgent.Me Agent Account
 
 == Changelog ==
+= 1.2.2 =
+* Removed plugin dependency of 'WP Control', utilising built-in CRON functionality instead
+
 = 1.2.1 =
 * Fixed XML object/array discrepancy upon CRON update attempt
 
