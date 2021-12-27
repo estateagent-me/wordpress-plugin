@@ -1,14 +1,19 @@
 === EstateAgent.Me ===
 Contributors: dazecoop
 Requires at least: 4.1
-Tested up to: 5.4.2
+Tested up to: 5.8.2
 Requires PHP: 5.4
-Stable tag: 1.1.93
+Stable tag: 1.2.0
 
 == Description ==
 List your properties on a WordPress-powered site via your EstateAgent.Me Agent Account
 
 == Changelog ==
+= 1.2.0 =
+* Moved to Github for hosting public repository
+* Enabled use of EA_DOMAIN, controllable via conf.ini file
+* Improved hiding of property types if no properties
+
 = 1.1.93 =
 * Fixed unparenthesized support on property search
 * Fixed 'Include under offer' checkbox layout issue on some themes
