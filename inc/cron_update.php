@@ -59,6 +59,9 @@ function EACronUpdate( $surpress_messages = true )
     else
     {
         $xml = simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA);
+        $xml = (object)json_decode(json_encode($xml), true);
+        $xml->types = (object)$xml->types;
+        $xml->types->category = (object)$xml->types->category;
 
         // remove all data in Property Types tabe
         $wpdb->query('TRUNCATE TABLE ' . $wpdb->prefix . 'ea_property_types');
@@ -68,8 +71,12 @@ function EACronUpdate( $surpress_messages = true )
          */
         foreach ($xml->types->category as $category) {
 
+            $category = (object)$category;
+            $category->types = (object)$category->types;
+            $category->types->type = (object)$category->types->type;
             foreach ($category->types->type as $type) {
                 // insert / update
+                $type = (object)$type;
                 $data = array( 
                     'type_id' => $type->id,
                     'name' => $type->name,

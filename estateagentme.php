@@ -9,7 +9,7 @@
  * Plugin Name:       EstateAgent.Me
  * Plugin URI:        https://estateagent.me
  * Description:       List your properties on a WordPress-powered site via your EstateAgent.Me Agent Account
- * Version:           1.2.2
+ * Version:           1.2.3
  * Author:            EstateAgent.Me
  * Author URI:        https://estateagent.me
  * License:           GPL-2.0+
@@ -18,7 +18,7 @@
  * Domain Path:       /languages
  */
 
-define('EA_VERSION', '1.2.2');
+define('EA_VERSION', '1.2.3');
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
