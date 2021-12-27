@@ -3,12 +3,15 @@ Contributors: dazecoop
 Requires at least: 4.1
 Tested up to: 5.8.2
 Requires PHP: 5.4
-Stable tag: 1.2.0
+Stable tag: 1.2.1
 
 == Description ==
 List your properties on a WordPress-powered site via your EstateAgent.Me Agent Account
 
 == Changelog ==
+= 1.2.1 =
+* Fixed XML object/array discrepancy upon CRON update attempt
+
 = 1.2.0 =
 * Moved to Github for hosting public repository
 * Enabled use of EA_DOMAIN, controllable via conf.ini file

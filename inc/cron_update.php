@@ -125,6 +125,14 @@ function EACronUpdate( $surpress_messages = true )
     else
     {
         $xml = simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA);
+        $xml = (object)json_decode(json_encode($xml), true);
+        
+        // Convert all child's to objects
+        $xml->agent = (object)$xml->agent;
+        $xml->agent->address = (object)$xml->agent->address;
+        $xml->agent->social_media = (object)$xml->agent->social_media;
+        $xml->properties = (object)$xml->properties;
+        $xml->properties->property = (object)$xml->properties->property;
 
         // remove all data in Agents table
         $wpdb->query('TRUNCATE TABLE ' . $wpdb->prefix . 'ea_agent');
@@ -162,7 +170,7 @@ function EACronUpdate( $surpress_messages = true )
                 'social_twitter' => $xml->agent->social_media->twitter,
                 'social_instagram' => $xml->agent->social_media->instagram,
                 'social_linkedin' => $xml->agent->social_media->linkedin,
-            ) 
+            )
         );
 
         /**
@@ -170,6 +178,18 @@ function EACronUpdate( $surpress_messages = true )
          */
         foreach ($xml->properties->property as $property)
         {
+            // Convert all child's to objects
+            $property = (object)$property;
+            $property->address = (object)$property->address;
+            $property->features = (object)$property->features;
+            $property->features->feature = (object)$property->features->feature;
+            $property->images = (object)$property->images;
+            $property->images->image = (object)$property->images->image;
+            $property->epcs = (object)$property->epcs;
+            $property->epcs->epc = (object)$property->epcs->epc;
+            $property->floorplans = (object)$property->floorplans;
+            $property->floorplans->floorplan = (object)$property->floorplans->floorplan;
+
             // insert / update properties
             $wpdb->replace( 
                 $wpdb->prefix . 'ea_properties', 
@@ -203,7 +223,7 @@ function EACronUpdate( $surpress_messages = true )
                     'no_chain' => $property->no_chain,
                     'description_short' => $property->description_short,
                     'description_long' => $property->description_long,
-                    'image_default' => (!empty($property->image_default) ? $property->image_default : $img),
+                    'image_default' => (!empty($property->image_default) ? $property->image_default : $noimg),
                 ) 
             );
 
@@ -212,6 +232,7 @@ function EACronUpdate( $surpress_messages = true )
              */
             foreach ($property->features->feature as $feature)
             {
+                $feature = (object)$feature;
                 $wpdb->replace( 
                     $wpdb->prefix . 'ea_properties_features', 
                     array( 
@@ -227,6 +248,7 @@ function EACronUpdate( $surpress_messages = true )
              */
             foreach ($property->images->image as $image)
             {
+                $image = (object)$image;
                 $wpdb->replace( 
                     $wpdb->prefix . 'ea_properties_images', 
                     array( 
@@ -243,6 +265,7 @@ function EACronUpdate( $surpress_messages = true )
              */
             foreach ($property->epcs->epc as $epc)
             {
+                $epc = (object)$epc;
                 $wpdb->replace( 
                     $wpdb->prefix . 'ea_properties_epcs', 
                     array( 
@@ -259,6 +282,7 @@ function EACronUpdate( $surpress_messages = true )
              */
             foreach ($property->floorplans->floorplan as $floorplan)
             {
+                $floorplan = (object)$floorplan;
                 $wpdb->replace( 
                     $wpdb->prefix . 'ea_properties_floorplans', 
                     array( 
