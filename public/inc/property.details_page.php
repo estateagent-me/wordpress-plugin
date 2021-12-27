@@ -89,8 +89,8 @@
                         <?php endif; ?>
                         <ul id="lightSlider" class="m-0">
                             <?php if ($numTotalMedia === 0): ?>
-                                <li data-thumb="https://estateagent.me/img/noimg.png">
-                                    <img src="https://estateagent.me/img/noimg.png" />
+                                <li data-thumb="<?php echo EA_DOMAIN; ?>/img/noimg.png">
+                                    <img src="<?php echo EA_DOMAIN; ?>/img/noimg.png" />
                                 </li>
                             <?php endif; ?>
                             <?php foreach ($images as $img):

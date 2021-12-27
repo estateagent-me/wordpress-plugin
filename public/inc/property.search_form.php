@@ -143,58 +143,58 @@
              * Property type
              */
             ?>
-            <div class="col-5 ea-search-form-group ea-search-form-type">
-                <div class="form-group">
-                    <div class="row no-gutters w-100">
-                        <?php if (!empty($property_types)): ?>
-                            <div class="col pr-1">
-                                <select style="width:100%;max-width:100%;" class="form-control" name="ea-search-type-parent" id="ea-search-type-parent">
-                                    <option value="">- Property Type -</option>
-                                    <?php foreach ($property_types as $parent => $children):
-                                        $parentVal = '';
-                                        foreach ($children as $type) { $parentVal .= "{$type->type_id},"; }
-                                        ?>
-                                        <option <?php echo (isset($_POST['ea-search-type-parent'])&&$_POST['ea-search-type-parent']==substr($parentVal,0,-1) ? 'selected' : ''); ?>
-                                            value="<?php echo substr($parentVal,0,-1); ?>" data-parent="<?php echo $parent; ?>">
-                                                <?php echo $parent; ?>
-                                        </option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                            <div class="col" style="display:none;" id="ea-search-type-children-col">
-                                <?php
-                                $__post_search_type_children = isset($_POST['ea-search-type-children']) ? $_POST['ea-search-type-children'] : false;
-                                ?>
-                                <select style="width:100%;max-width:100%;" class="form-control" name="ea-search-type-children" id="ea-search-type-children">
-                                    <?php foreach ($property_types as $parent => $children):
-                                        $parentVal = '';
-                                        foreach ($children as $type) { $parentVal .= "{$type->type_id},"; }
-                                        $selected = false;
-                                        if (!$__post_search_type_children) {
-                                            $selected = true;
-                                        } else {
-                                            if ($__post_search_type_children == substr($parentVal,0,-1)) {
-                                                $selected = true;
-                                            }
-                                        }
-                                        ?>
-                                        <option <?php echo $selected; ?>
-                                            value="<?php echo substr($parentVal,0,-1); ?>" data-all data-parent="<?php echo $parent; ?>">
-                                                - All -
-                                        </option>
-                                        <?php foreach ($children as $type): ?>
-                                            <option <?php echo ($__post_search_type_children === $type->type_id ? 'selected' : ''); ?>
-                                                value="<?php echo $type->type_id; ?>" data-parent="<?php echo $parent; ?>">
-                                                    <?php echo $type->name; ?>
+            <?php if (!empty($property_types)): ?>
+                <div class="col-5 ea-search-form-group ea-search-form-type">
+                    <div class="form-group">
+                        <div class="row no-gutters w-100">
+                                <div class="col pr-1">
+                                    <select style="width:100%;max-width:100%;" class="form-control" name="ea-search-type-parent" id="ea-search-type-parent">
+                                        <option value="">- Property Type -</option>
+                                        <?php foreach ($property_types as $parent => $children):
+                                            $parentVal = '';
+                                            foreach ($children as $type) { $parentVal .= "{$type->type_id},"; }
+                                            ?>
+                                            <option <?php echo (isset($_POST['ea-search-type-parent'])&&$_POST['ea-search-type-parent']==substr($parentVal,0,-1) ? 'selected' : ''); ?>
+                                                value="<?php echo substr($parentVal,0,-1); ?>" data-parent="<?php echo $parent; ?>">
+                                                    <?php echo $parent; ?>
                                             </option>
-                                    <?php endforeach;
-                                    endforeach; ?>
-                                </select>
-                            </div>
-                        <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="col" style="display:none;" id="ea-search-type-children-col">
+                                    <?php
+                                    $__post_search_type_children = isset($_POST['ea-search-type-children']) ? $_POST['ea-search-type-children'] : false;
+                                    ?>
+                                    <select style="width:100%;max-width:100%;" class="form-control" name="ea-search-type-children" id="ea-search-type-children">
+                                        <?php foreach ($property_types as $parent => $children):
+                                            $parentVal = '';
+                                            foreach ($children as $type) { $parentVal .= "{$type->type_id},"; }
+                                            $selected = false;
+                                            if (!$__post_search_type_children) {
+                                                $selected = true;
+                                            } else {
+                                                if ($__post_search_type_children == substr($parentVal,0,-1)) {
+                                                    $selected = true;
+                                                }
+                                            }
+                                            ?>
+                                            <option <?php echo $selected; ?>
+                                                value="<?php echo substr($parentVal,0,-1); ?>" data-all data-parent="<?php echo $parent; ?>">
+                                                    - All -
+                                            </option>
+                                            <?php foreach ($children as $type): ?>
+                                                <option <?php echo ($__post_search_type_children === $type->type_id ? 'selected' : ''); ?>
+                                                    value="<?php echo $type->type_id; ?>" data-parent="<?php echo $parent; ?>">
+                                                        <?php echo $type->name; ?>
+                                                </option>
+                                        <?php endforeach;
+                                        endforeach; ?>
+                                    </select>
+                                </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            <?php endif; ?>
 
             <?php
             /**

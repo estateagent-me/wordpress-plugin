@@ -30,22 +30,25 @@ if ( ! defined( 'WPINC' ) ) {
  */
 require 'plugin-update-checker/plugin-update-checker.php';
 $myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
-	'https://bitbucket.org/dze_pub/estateagentme-wp-plugin',
+	'https://github.com/estateagent-me/wordpress-plugin',
 	__FILE__,
 	'estateagentme'
 );
 
-$myUpdateChecker->setAuthentication(array(
-	'consumer_key' => 'h2shDugw7Sjfrtrzan',
-	'consumer_secret' => 'Cpr5xY4vCLdTTfeyeg2XAUhDqAe5yNhk',
-));
-
 $myUpdateChecker->setBranch('master');
 
-if (strstr(get_site_url(),'.test')) define( 'EA_ENV_IS_LOCAL', true );
+// Load conf.ini
+$conf = parse_ini_file(__DIR__ . '/conf.ini', true);
 
-$ea_cdn = 'https://estateagent.me/wp/';
-if (defined('EA_ENV_IS_LOCAL')) $ea_cdn = 'http://estateagent.test/wp/';
+// Setup & define EA_DOMAIN
+$ea_domain = 'https://estateagent.me';
+if (isset($conf['EA_DOMAIN'])) {
+    $ea_domain = $conf['EA_DOMAIN'];
+}
+define('EA_DOMAIN', $ea_domain);
+
+// Define EA_CDN
+$ea_cdn = EA_DOMAIN . '/wp/';
 define('EA_CDN', $ea_cdn);
 
 
@@ -58,8 +61,7 @@ require_once plugin_dir_path( __FILE__ ) . 'inc/classes/property.php';      // p
 
 require_once plugin_dir_path( __FILE__ ) . 'inc/install.php';               // install (for creating DB's)
 require_once plugin_dir_path( __FILE__ ) . 'inc/cron_update.php';           // function that updates data
-
-add_action('estateagentme-cron-update', 'EACronUpdate');                    // this is the hook that is used for the Cron
+require_once plugin_dir_path( __FILE__ ) . 'inc/cron_schedule.php';         // run cron itself
 
 
 add_action( 'admin_init', 'is_wp_control_installed' );

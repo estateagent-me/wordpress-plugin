@@ -8,26 +8,65 @@
                 Instructions / Setup
             </h2>
             <ol>
+                <?php
+                $variablesOK = false;
+                if (get_option('ea-agent-id') && get_option('ea-auth-key')) {
+                    $variablesOK = true;
+                }
+                ?>
                 <li style="margin-bottom:20px;">
-                    Enter <strong>Agent ID</strong> and <strong>Authentication Key</strong> as generated from EstateAgent.Me
+                    <?php if ($variablesOK): ?>
+                        <div style="color:green;">
+                            <span style="font-size:1.2rem">&#10004;</span>
+                            Looks good!
+                        </div>
+                    <?php endif; ?>
+                    <span style="<?php echo ($variablesOK ? 'opacity:.5' : ''); ?>">
+                        Enter <strong>Agent ID</strong> and <strong>Authentication Key</strong> as generated from EstateAgent.Me
+                    </span>
                 </li>
 
+                <?php
+                $mapKeyOK = false;
+                if (get_option('ea-google-maps-api-key')) {
+                    $mapKeyOK = true;
+                }
+                ?>
                 <li style="margin-bottom:20px;">
-                    Generate a <a href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank"><strong>Google Maps API Key</strong></a> &amp; enter it in the field on this page.
+                    <?php if ($mapKeyOK): ?>
+                        <div style="color:green;">
+                            <span style="font-size:1.2rem">&#10004;</span>
+                            Looks good!
+                        </div>
+                    <?php endif; ?>
+                    <span style="<?php echo ($mapKeyOK ? 'opacity:.5' : ''); ?>">
+                        Generate a <a href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank"><strong>Google Maps API Key</strong></a> &amp; enter it in the field on this page.
+                    </span>
                 </li>
 
+                <?php
+                $permalinksOK = false;
+                $properties_page_exists = get_page_by_path('/properties');
+                if ($properties_page_exists->ID) {
+                    $properties_page_permalink = get_permalink($properties_page_exists->ID);
+                    if (strstr($properties_page_permalink, '/properties')) {
+                        $permalinksOK = true;
+                    }
+                }
+                ?>
                 <li style="margin-bottom:20px;">
-                    Go to the <a href="options-permalink.php">Permalinks Page</a>,<br />
-                    Ensure <strong>Plain is <em>NOT</em></strong> selected,<br />
-                    And hit <strong>Save Changes</strong><br />
-                    <span style="opacity:.6">(This refreshes your permalink structure in order to view Property Details pages, which is generated with SEO-friendly URL's)</span>
-                </li>
-
-                <li>
-                    Install <a href="plugin-install.php?s=wp+control&tab=search&type=term" target="_blank">WP Control</a> Plugin &amp; Activate it.<br />
-                    Then, under <strong>Settings > Cron Schedules > Manage Cron Events</strong> enter a new Cron Event.<br />
-                    Hook Name = <strong>estateagentme-cron-update</strong><br />
-                    Recurrence = <strong>Once Hourly</strong>
+                    <?php if ($permalinksOK): ?>
+                        <div style="color:green;">
+                            <span style="font-size:1.2rem">&#10004;</span>
+                            Looks good!
+                        </div>
+                    <?php endif; ?>
+                    <span style="<?php echo ($permalinksOK ? 'opacity:.5' : ''); ?>">
+                        Go to the <a href="options-permalink.php">Permalinks Page</a>,<br />
+                        Ensure <strong>Plain is <em>NOT</em></strong> selected,<br />
+                        And hit <strong>Save Changes</strong><br />
+                        <span style="opacity:.6">(This refreshes your permalink structure in order to view Property Details pages, which is generated with SEO-friendly URL's)</span>
+                    </span>
                 </li>
             </ol>
         </div>

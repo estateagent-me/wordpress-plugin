@@ -25,7 +25,7 @@ function EACronUpdate( $surpress_messages = true )
     /**
      * Property types request & install
      */
-    $url = 'https://estateagent.me/xml/properties/types/' . $agent_id;
+    $url = EA_DOMAIN . '/xml/properties/types/' . $agent_id;
 
     if (!$surpress_messages) echo "<h1>cURL request to -- {$url}</h1>";
 
@@ -91,7 +91,7 @@ function EACronUpdate( $surpress_messages = true )
      */
     $noimg = str_replace('/inc','',plugin_dir_url(__FILE__)) . 'public/img/noimg.png';
 
-    $url = 'https://estateagent.me/xml/properties/by-agent/' . $agent_id;
+    $url = EA_DOMAIN . '/xml/properties/by-agent/' . $agent_id;
 
     if (!$surpress_messages) echo "<h1>cURL request to -- {$url}</h1>";
 
