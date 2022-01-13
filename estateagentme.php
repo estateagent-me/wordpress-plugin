@@ -9,7 +9,7 @@
  * Plugin Name:       EstateAgent.Me
  * Plugin URI:        https://estateagent.me
  * Description:       List your properties on a WordPress-powered site via your EstateAgent.Me Agent Account
- * Version:           1.2.3
+ * Version:           1.2.4
  * Author:            EstateAgent.Me
  * Author URI:        https://estateagent.me
  * License:           GPL-2.0+
@@ -18,7 +18,7 @@
  * Domain Path:       /languages
  */
 
-define('EA_VERSION', '1.2.3');
+define('EA_VERSION', '1.2.4');
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -177,24 +177,25 @@ function css_and_js()
     if (!wp_script_is( 'jquery', 'enqueued' )) {
         wp_enqueue_script( 'jquery' );
     }
-    // wp_deregister_script('jquery');
-    // wp_enqueue_script('jquery', '//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js', array(), EA_VERSION, false);
 
-    wp_enqueue_script('bootstrap-js', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js', array('jquery'), EA_VERSION, false);
+    // Only include the following on EA front-end pages
+    if (is_page('properties') || is_page('property-details')) {
+        wp_enqueue_script('bootstrap-js', 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js', array('jquery'), EA_VERSION, false);
 
-    wp_enqueue_style('fontawesome-css', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css', array(), EA_VERSION, false);
-
-    // lightslider
-    wp_enqueue_script('lightslider-js', 'https://cdnjs.cloudflare.com/ajax/libs/lightslider/1.1.6/js/lightslider.min.js', array('jquery'), EA_VERSION, false);
-    wp_enqueue_style('lightslider-css', 'https://cdnjs.cloudflare.com/ajax/libs/lightslider/1.1.6/css/lightslider.min.css', array(), EA_VERSION, false);
-
-    // css-element-queries
-    wp_enqueue_script('css-element-queries-ResizeSensor', 'https://cdnjs.cloudflare.com/ajax/libs/css-element-queries/1.2.1/ResizeSensor.min.js', array('jquery'), EA_VERSION, false);
-    wp_enqueue_script('css-element-queries-ElementQueries', 'https://cdnjs.cloudflare.com/ajax/libs/css-element-queries/1.2.1/ElementQueries.min.js', array('jquery'), EA_VERSION, false);
-
-    // ekko-lightbox
-    wp_enqueue_script('ekko-lightbox-js', 'https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js', array('jquery'), EA_VERSION, false);
-    wp_enqueue_style('ekko-lightbox-css', 'https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css', array(), EA_VERSION, false);
+        wp_enqueue_style('fontawesome-css', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css', array(), EA_VERSION, false);
+    
+        // lightslider
+        wp_enqueue_script('lightslider-js', 'https://cdnjs.cloudflare.com/ajax/libs/lightslider/1.1.6/js/lightslider.min.js', array('jquery'), EA_VERSION, false);
+        wp_enqueue_style('lightslider-css', 'https://cdnjs.cloudflare.com/ajax/libs/lightslider/1.1.6/css/lightslider.min.css', array(), EA_VERSION, false);
+    
+        // css-element-queries
+        wp_enqueue_script('css-element-queries-ResizeSensor', 'https://cdnjs.cloudflare.com/ajax/libs/css-element-queries/1.2.1/ResizeSensor.min.js', array('jquery'), EA_VERSION, false);
+        wp_enqueue_script('css-element-queries-ElementQueries', 'https://cdnjs.cloudflare.com/ajax/libs/css-element-queries/1.2.1/ElementQueries.min.js', array('jquery'), EA_VERSION, false);
+    
+        // ekko-lightbox
+        wp_enqueue_script('ekko-lightbox-js', 'https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js', array('jquery'), EA_VERSION, false);
+        wp_enqueue_style('ekko-lightbox-css', 'https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css', array(), EA_VERSION, false);
+    }
 
     wp_enqueue_style('ea-styles-cdn', EA_CDN.'css/wp.css', array(), EA_VERSION, 'all');
     wp_enqueue_style('ea-styles', plugins_url('public/css/styles.css' ,__FILE__ ), array(), EA_VERSION, 'all');
